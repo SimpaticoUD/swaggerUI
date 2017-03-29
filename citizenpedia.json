@@ -1,0 +1,250 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Citizenpedia API",
+        "description": "API for Citizenpedia, Simpatico Project",
+        "version": "1.0.0"
+    },
+    "host": "simpatico.morelab.deusto.es",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/qae/api",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/stats/questions/{eservice}": {
+            "get": {
+                "summary": "Counts the number of questions related to the provided eservice.",
+                "description": "This method caunts the number of questions related to the properties provided as parameters. It is commonly used by the Interactive Front-End\n",
+                "parameters": [
+                    {
+                        "name": "eservice",
+                        "in": "path",
+                        "description": "Eservice code.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "QAE"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Number of questions",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Number of answers."
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/stats/questions/{eservice}/{paragraph}": {
+            "get": {
+                "summary": "Counts the number of questions related to the provided parameters.",
+                "description": "This method caunts the number of questions related to the properties provided as parameters. It is commonly used by the Interactive Front-End\n",
+                "parameters": [
+                    {
+                        "name": "eservice",
+                        "in": "path",
+                        "description": "Eservice code.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "paragraph",
+                        "in": "path",
+                        "description": "Paragraph of the question.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "QAE"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Number of questions",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "Number of questions."
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/qae/questions/{eservice}": {
+            "get": {
+                "summary": "Gets the questions related to the provided parameters",
+                "description": "This method gets all the questions related to the properties provided as parameters. It is commonly used by the Interactive Front-End\n",
+                "parameters": [
+                    {
+                        "name": "eservice",
+                        "in": "path",
+                        "description": "Eservice code.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "QAE"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of questions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Question"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/qae/questions/{eservice}/{paragraph}": {
+            "get": {
+                "summary": "Gets the questions related to the provided parameters",
+                "description": "This method gets all the questions related to the properties provided as parameters. It is commonly used by the Interactive Front-End\n",
+                "parameters": [
+                    {
+                        "name": "eservice",
+                        "in": "path",
+                        "description": "Eservice code.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "paragraph",
+                        "in": "path",
+                        "description": "Paragraph of the question.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "QAE"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of questions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Question"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/qae/term": {
+            "get": {
+                "summary": "Gets the term wich name is the passed as parameter",
+                "description": "This method gets the definition of the provided term.\n",
+                "parameters": [
+                    {
+                        "name": "term",
+                        "in": "query",
+                        "description": "Term.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "QAE"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Term definition",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Question": {
+            "type": "object",
+            "properties": {
+                "question_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific question."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the question."
+                },
+                "numberAnswers": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of answers."
+                },
+                "url": {
+                    "type": "string",
+                    "description": "Url of question."
+                },
+                "stars": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of stars."
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
